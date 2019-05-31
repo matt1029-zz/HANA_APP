@@ -12,6 +12,23 @@ modules:
     path: web
     requires:
       - name: UAA-service
+      - name: core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true
+  - name: core_xsjs
+    type: nodejs
+    path: core_xsjs
+    provides:
+      - name: core_xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_db
+      - name: UAA-service
+      - name: db
 resources:
   - name: hdi_db
     parameters:

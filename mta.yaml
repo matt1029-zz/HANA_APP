@@ -1,19 +1,26 @@
 ID: HANA_APP
 _schema-version: '2.1'
 version: 0.0.1
-
 modules:
- - name: DB
-   type: hdb
-   path: DB
-   requires:
-    - name: hdi_DB
-
+  - name: db
+    type: hdb
+    path: db
+    requires:
+      - name: hdi_db
+  - name: web
+    type: html5
+    path: web
+    requires:
+      - name: UAA-service
 resources:
- - name: hdi_DB
-   parameters:
+  - name: hdi_db
+    parameters:
       config:
-         schema: DB
-   properties:
-      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
+        schema: DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: UAA-service
+    type: com.sap.xs.uaa-space
+    parameters:
+      config-path: ./xs-security.json

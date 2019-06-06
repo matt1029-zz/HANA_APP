@@ -9,7 +9,7 @@ modules:
       - name: hdi_db
         properties:
           TARGET_CONTAINER: '~{hdi-container-name}'
-      - name: CROSS_SCHEMA_PRODUCTS
+      - name: CROSS_SCHEMA_PRODUCTS_1
         group: SERVICE_REPLACEMENTS
         properties:
           key: ServiceName_1
@@ -54,7 +54,9 @@ resources:
     parameters:
       service: sapui5_sb
       service-plan: sapui5-1.60
-  - name: CROSS_SCHEMA_PRODUCTS
+  - name: CROSS_SCHEMA_PRODUCTS_1
+    type: org.cloudfoundry.existing-service
     properties:
       products-service-name: '${service-name}'
-    type: org.cloudfoundry.existing-service
+    parameters:
+      service: CROSS_SCHEMA_PRODUCTS_1
